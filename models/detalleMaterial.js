@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
         cantidad: {
             type: DataTypes.INTEGER,
             allowNull: true,
-            field: 'CANRIDAD'
+            field: 'CANTIDAD'
         },
         unidad: {
             type: DataTypes.INTEGER,

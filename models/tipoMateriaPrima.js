@@ -19,21 +19,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
             field: 'DESCRIPCION'
         },
-        fechaInicio: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            field: 'FECHA_INICIO'
-        },
-        fechaFin: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            field: 'FECHA_FIN'
-        },
-        costo: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            field: 'COSTO'
-        },
         activo: {
           type: DataTypes.BOOLEAN,
           allowNull: false,

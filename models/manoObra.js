@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false,
           primaryKey: true,
           autoIncrement: true,
-          field: 'ID_manoObra'
+          field: 'ID_MANO_OBRA'
         },
         idFase: {
             type: DataTypes.BIGINT,

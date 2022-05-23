@@ -9,16 +9,16 @@ module.exports = function(sequelize, DataTypes) {
           autoIncrement: true,
           field: 'ID_FASE'
         },
-        idCompra: {
+        idObra: {
             type: DataTypes.BIGINT,
             allowNull: false,
             references: {
                 model: {
-                    tableName: "COMPRA",
+                    tableName: "OBRA",
                 },
-                key: "ID_COMPRA",
+                key: "ID_OBRA",
             },
-            field: "ID_COMPRA",
+            field: "ID_OBRA",
         },
         nombre: {
             type: DataTypes.INTEGER,
