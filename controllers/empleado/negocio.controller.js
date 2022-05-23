@@ -28,7 +28,6 @@ exports.findAll = async (req, res) => {
 exports.save = async (req, res) => {
     
 	let obj = req.body;
-    console.log(obj);
 	// Guardar
 	const result = await save(obj);
 
