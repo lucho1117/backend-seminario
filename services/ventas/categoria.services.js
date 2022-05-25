@@ -29,7 +29,7 @@ exports.save = async (obj) => {
 		activo: 1,
 		fechaCreacion: generateDateNow().toString(),
 	};
-
+	console.log(aux);
 	return categoria
 		.create(aux)
 		.then((response) => {
