@@ -8,19 +8,22 @@ const {generateDateNow} = require('../global.services');
 
 
 exports.findAll = async () => {
-  return producto.findAll({
-      where: {
-        activo: true,
-      },
-      order: [["idProducto", "DESC"]],
-    })
-    .then(response=>{
-      return responsesServices.success(response);
-    })
-    .catch(error => {
-      console.log(error);
-      return responsesServices.error(error.message);
-    })
+	let query = `SELECT P.ID_PRODUCTO idProducto, P.NOMBRE nombre, P.DESCRIPCION descripcion, P.VENTA venta,
+			P.PRECIO precio, P.STOCK stock, P.FECHA_INGRESO fechaIngreso, C.NOMBRE categoria
+			FROM PRODUCTO P
+			INNER JOIN CATEGORIA C ON C.ID_CATEGORIA = P.ID_CATEGORIA
+			WHERE P.ACTIVO = 1`;
+	return sequelize
+		.query(query, {
+			type: Sequelize.QueryTypes.SELECT,
+		})
+		.then((response) => {
+			return responsesServices.success(response);
+		})
+		.catch((error) => {
+			console.log(error.message);
+			return responsesServices.error(error.message);
+		});
 }
 
 exports.save = async (obj) => {
@@ -36,6 +39,7 @@ exports.save = async (obj) => {
 			return responsesServices.success(response);
 		})
 		.catch((error) => {
+			console.log(error);
 			return responsesServices.error(error.message);
 		});
 };

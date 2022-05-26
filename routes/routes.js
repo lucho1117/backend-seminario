@@ -73,6 +73,7 @@ app.post("/cliente/list", clienteController.findAll);
 app.post("/cliente/save", clienteController.save);
 app.post("/cliente/update", clienteController.update);
 app.post("/cliente/delete", clienteController.delete);
+app.post("/cliente/listByNegocio", clienteController.findAllByNegocio);
 
 app.post("/empleado/list", empleadoController.findAll);
 app.post("/empleado/save", empleadoController.save);

@@ -23,6 +23,23 @@ exports.findAll = async () => {
     })
 }
 
+exports.findAllByNegocio = async (obj) => {
+	return cliente.findAll({
+		where: {
+		  activo: true,
+		  idNegocio: obj.idNegocio
+		},
+		order: [["idCliente", "DESC"]],
+	  })
+	  .then(response=>{
+		return responsesServices.success(response);
+	  })
+	  .catch(error => {
+		console.log(error);
+		return responsesServices.error(error.message);
+	  })
+  }
+
 exports.save = async (obj) => {
 	const aux = {
 		...obj,
@@ -36,6 +53,7 @@ exports.save = async (obj) => {
 			return responsesServices.success(response);
 		})
 		.catch((error) => {
+			console.log(error);
 			return responsesServices.error(error.message);
 		});
 };

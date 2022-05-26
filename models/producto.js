@@ -48,7 +48,7 @@ module.exports = function(sequelize, DataTypes) {
         fechaIngreso: {
             type: DataTypes.BOOLEAN,
             allowNull: true,
-            field: 'VENTA'
+            field: 'FECHA_INGRESO'
           },
         venta: {
             type: DataTypes.BOOLEAN,
