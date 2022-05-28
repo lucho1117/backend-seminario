@@ -40,6 +40,11 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
             field: 'DESCRIPCION'
         },
+        disponible: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: 0,
+          field: 'DISPONIBLE'
+        },
         activo: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
