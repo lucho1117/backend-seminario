@@ -53,8 +53,7 @@ module.exports = function(sequelize, DataTypes) {
         venta: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: 0,
-            field: 'ACTIVO'
+            field: 'VENTA'
         },
         activo: {
           type: DataTypes.BOOLEAN,

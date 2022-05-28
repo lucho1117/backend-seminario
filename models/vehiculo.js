@@ -30,6 +30,11 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             field: 'MODELO'
         },
+        marca: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          field: 'MARCA'
+      },
         color: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -42,7 +47,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         disponible: {
           type: DataTypes.BOOLEAN,
-          defaultValue: 0,
+          allowNull: true,
           field: 'DISPONIBLE'
         },
         activo: {

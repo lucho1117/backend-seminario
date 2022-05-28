@@ -9,10 +9,12 @@ const {generateDateNow} = require('../global.services');
 
 exports.findAll = async () => {
 	let query = `SELECT P.ID_PRODUCTO idProducto, P.NOMBRE nombre, P.DESCRIPCION descripcion, P.VENTA venta,
-			P.PRECIO precio, P.STOCK stock, P.FECHA_INGRESO fechaIngreso, C.NOMBRE categoria
+			P.PRECIO precio, P.STOCK stock, P.FECHA_INGRESO fechaIngreso, C.NOMBRE categoria, P.ID_CATEGORIA idCategoria, P.ID_PROVEEDOR idProveedor
 			FROM PRODUCTO P
 			INNER JOIN CATEGORIA C ON C.ID_CATEGORIA = P.ID_CATEGORIA
-			WHERE P.ACTIVO = 1`;
+			WHERE P.ACTIVO = 1
+			ORDER BY P.ID_PRODUCTO DESC
+	`;
 	return sequelize
 		.query(query, {
 			type: Sequelize.QueryTypes.SELECT,

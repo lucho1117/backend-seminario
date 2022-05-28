@@ -8,19 +8,23 @@ const {generateDateNow} = require('../global.services');
 
 
 exports.findAll = async () => {
-  return vehiculo.findAll({
-      where: {
-        activo: true,
-      },
-      order: [["idVehiculo", "DESC"]],
-    })
-    .then(response=>{
-      return responsesServices.success(response);
-    })
-    .catch(error => {
-      console.log(error);
-      return responsesServices.error(error.message);
-    })
+	let query = `SELECT V.ID_VEHICULO idVehiculo, V.PLACA placa, V.MODELO modelo, V.COLOR color, V.DESCRIPCION descripcion,
+					V.MARCA marca, V.DISPONIBLE disponible, TV.NOMBRE tipoVehiculo, V.ID_TIPO_VEHICULO idTipoVehiculo
+					FROM VEHICULO V
+					INNER JOIN TIPO_VEHICULO TV ON TV.ID_TIPO_VEHICULO = V.ID_TIPO_VEHICULO
+					WHERE V.ACTIVO= 1
+				ORDER BY V.ID_VEHICULO DESC`;
+	return sequelize
+		.query(query, {
+			type: Sequelize.QueryTypes.SELECT,
+		})
+		.then((response) => {
+			return responsesServices.success(response);
+		})
+		.catch((error) => {
+			console.log(error.message);
+			return responsesServices.error(error.message);
+		});
 }
 
 exports.save = async (obj) => {
@@ -36,11 +40,13 @@ exports.save = async (obj) => {
 			return responsesServices.success(response);
 		})
 		.catch((error) => {
+			console.log(error);
 			return responsesServices.error(error.message);
 		});
 };
 
 exports.update = async (obj) => {
+	console.log(obj);
 	return vehiculo
 		.update(obj, {
 			where: { idVehiculo: obj.idVehiculo },
@@ -49,7 +55,7 @@ exports.update = async (obj) => {
 			return responsesServices.success(response);
 		})
 		.catch((error) => {
-			console.log(error.message);
+			console.log(error);
 			return responsesServices.error(error.message);
 		});
 };
