@@ -8,19 +8,26 @@ const {generateDateNow} = require('../global.services');
 
 
 exports.findAll = async () => {
-  return viaje.findAll({
-      where: {
-        activo: true,
-      },
-      order: [["idViaje", "DESC"]],
-    })
-    .then(response=>{
-      return responsesServices.success(response);
-    })
-    .catch(error => {
-      console.log(error);
-      return responsesServices.error(error.message);
-    })
+	let query = `SELECT V.ID_VIAJE idViaje, V.ID_CARGAMENTO idCargamento, V.ID_CLIENTE idCliente,
+					V.ORIGEN origen, V.DESTINO destino, V.FECHA_INICIO fechaInicio, V.FECHA_FIN fechaFin,
+					V.KILOMETROS kilometros, V.TONELADAS toneladas, V.PRECIO precio, C.NOMBRE cargamento,
+					CL.NOMBRE cliente
+				FROM VIAJE V
+				INNER JOIN CARGAMENTO C ON C.ID_CARGAMENTO = V.ID_CARGAMENTO
+				INNER JOIN CLIENTE CL ON CL.ID_CLIENTE = V.ID_CLIENTE
+				WHERE V.ACTIVO = 1
+				ORDER BY V.ID_VIAJE DESC`;
+	return sequelize
+		.query(query, {
+			type: Sequelize.QueryTypes.SELECT,
+		})
+		.then((response) => {
+			return responsesServices.success(response);
+		})
+		.catch((error) => {
+			console.log(error.message);
+			return responsesServices.error(error.message);
+		});
 }
 
 exports.save = async (obj) => {
