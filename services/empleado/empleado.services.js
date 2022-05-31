@@ -23,6 +23,24 @@ exports.findAll = async () => {
     })
 }
 
+exports.findAllByRolArea = async (obj) => {
+	return empleado.findAll({
+		where: {
+		  activo: true,
+		  idRol: obj.idRol,
+		  idAreaNegocio: obj.idAreaNegocio
+		},
+		order: [["idEmpleado", "DESC"]],
+	  })
+	  .then(response=>{
+		return responsesServices.success(response);
+	  })
+	  .catch(error => {
+		console.log(error);
+		return responsesServices.error(error.message);
+	  })
+  }
+
 exports.save = async (obj) => {
 	const aux = {
 		...obj,

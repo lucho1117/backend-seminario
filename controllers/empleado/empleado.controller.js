@@ -1,7 +1,7 @@
 /************************************************************************
  * IMPORTS
  ************************************************************************/
- const { findAll, save, update, deleteById } = require('../../services/empleado/empleado.services');
+ const { findAll, save, update, deleteById, findAllByRolArea } = require('../../services/empleado/empleado.services');
  const responsesServices = require('../../responses/responses.services');
  
  /************************************************************************
@@ -24,6 +24,19 @@
              responsesServices.error((msg = errorMessages.ERROR_FIND)));
      }
  };
+
+ exports.findAllByRolArea = async (req, res) => {
+    let obj = req.body;
+    const result = await findAllByRolArea(obj);
+
+    if (result.valid) {
+        res.status(200).send(
+            responsesServices.success((data=result.data), msg=successMessages.SUCCESS_FINDALL));
+    } else {
+        res.status(400).send(
+            responsesServices.error((msg = errorMessages.ERROR_FIND)));
+    }
+};
  
  exports.save = async (req, res) => {
      
