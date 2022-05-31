@@ -26,15 +26,15 @@
  };
  
  exports.save = async (req, res) => {
-     
+     console.log(req);
      let obj = req.body;
      // Guardar
      const result = await save(obj);
- 
+    console.log(result);
      //validar proceso exitoso
      if (result.valid) {
          //retornar mensaje de exito
-         res.status(200).send(responsesServices.success((data = result.data), (msg = successMessages.SUCCESS_ADD)));
+         res.status(200).send(responsesServices.success((data = result.data), (msg = result.msg)));
      } else {
          //retornar mensaje de error
          res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_ADD)));
