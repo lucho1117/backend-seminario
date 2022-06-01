@@ -7,14 +7,18 @@ const {generateDateNow} = require('../global.services');
 //definimos el modelo
 
 
-exports.findAll = async () => {
+exports.findAll = async (obj) => {
 	let query = `SELECT P.ID_PRODUCTO idProducto, P.NOMBRE nombre, P.DESCRIPCION descripcion, P.VENTA venta,
 			P.PRECIO precio, P.STOCK stock, P.FECHA_INGRESO fechaIngreso, C.NOMBRE categoria, P.ID_CATEGORIA idCategoria, P.ID_PROVEEDOR idProveedor
 			FROM PRODUCTO P
 			INNER JOIN CATEGORIA C ON C.ID_CATEGORIA = P.ID_CATEGORIA
-			WHERE P.ACTIVO = 1
-			ORDER BY P.ID_PRODUCTO DESC
+			WHERE P.ACTIVO = 1`  
+			
+	if (obj.venta) query += ` AND P.VENTA = ${obj.venta}`
+
+	query +=	` ORDER BY P.ID_PRODUCTO DESC
 	`;
+	
 	return sequelize
 		.query(query, {
 			type: Sequelize.QueryTypes.SELECT,

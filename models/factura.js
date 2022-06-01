@@ -71,6 +71,12 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.INTEGER,
           allowNull: true,
           field: 'ID_ELIMINO'
+        },
+        alquiler: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true,
+          defaultValue: 0,
+          field: 'ALQUILER'
         }
       }, {
         sequelize,

@@ -14,7 +14,8 @@
   ************************************************************************/
  
  exports.findAll = async (req, res) => {
-     const result = await findAll();
+    let obj = req.body;
+     const result = await findAll(obj);
  
      if (result.valid) {
          res.status(200).send(
@@ -26,11 +27,11 @@
  };
  
  exports.save = async (req, res) => {
-     console.log(req);
+     
      let obj = req.body;
      // Guardar
      const result = await save(obj);
-    console.log(result);
+    
      //validar proceso exitoso
      if (result.valid) {
          //retornar mensaje de exito

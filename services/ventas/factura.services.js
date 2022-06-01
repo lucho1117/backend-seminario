@@ -10,7 +10,7 @@ const {generateDateNow} = require('../global.services');
 //definimos el modelo
 
 
-exports.findAll = async () => {
+exports.findAll = async (obj) => {
 	let finalFacturas = [];
 	let query = `SELECT F.ID_FACTURA idFactura, F.ID_CLIENTE idCliente, F.ID_TIPO_PAGO idTipoPago, F.ID_EMPLEADO idEmpleado,
 				F.FECHA fecha, F.DIRECCION direccion, F.TOTAL total, E.NOMBRE empleado, T.NOMBRE tipoPago, 
@@ -19,7 +19,7 @@ exports.findAll = async () => {
 			INNER JOIN EMPLEADO E ON E.ID_EMPLEADO = F.ID_EMPLEADO
 			INNER JOIN TIPO_PAGO T ON T.ID_TIPO_PAGO = F.ID_TIPO_PAGO
 			INNER JOIN CLIENTE C ON C.ID_CLIENTE = F.ID_CLIENTE
-			WHERE F.ACTIVO = 1
+			WHERE F.ACTIVO = 1 AND F.ALQUILER = ${obj.alquiler}
 			ORDER BY F.ID_FACTURA DESC;`;
 
 	let respFactura = await sequelize
@@ -80,6 +80,7 @@ exports.save = async (obj) => {
 		direccion: obj.direccion,
 		total: obj.total,
 		activo: 1,
+		alquiler: 0,
 		fechaCreacion: generateDateNow().toString(),
 	};
 
