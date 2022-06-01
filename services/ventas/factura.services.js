@@ -148,7 +148,7 @@ exports.deleteById = async (obj) => {
 		fechaEliminacion: generateDateNow().toString(),
 	};
 
-	return factura
+	let respFactura = await factura
 		.update(aux, { where: { idFactura: obj.idFactura } })
 		.then((response) => {
 			return responsesServices.success(response);
@@ -157,5 +157,26 @@ exports.deleteById = async (obj) => {
 			console.log(error.message);
 			return responsesServices.error(error.message);
 		});
+	if ( respFactura.valid ) {
+		
+		let respDetalle = await detalleVenta
+			.update(aux, { where: { idFactura: obj.idFactura } })
+			.then((response) => {
+				return responsesServices.success(response);
+			})
+			.catch((error) => {
+				console.log(error.message);
+				return responsesServices.error(error.message);
+			});
+		
+		if (respDetalle.valid) {
+			return responsesServices.success("Factura eliminada correctamente");
+		} else {
+			return responsesServices.error("Error al eliminar detalle de factura");
+		}
+		
+	} else {
+		return responsesServices.error("Error al eliminar la factura");
+	}
 };
 
