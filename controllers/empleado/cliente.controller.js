@@ -1,7 +1,7 @@
 /************************************************************************
  * IMPORTS
  ************************************************************************/
- const { findAll, save, update, deleteById, findAllByNegocio } = require('../../services/empleado/cliente.services');
+ const { findAll, save, update, deleteById, findAllByNegocio, findAllCondicion } = require('../../services/empleado/cliente.services');
  const responsesServices = require('../../responses/responses.services');
  
  /************************************************************************
@@ -89,3 +89,17 @@
          res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_DELETE)));
      }
  };
+
+ exports.findAllCondicion = async (req, res) => {
+    let obj = req.body;
+    const result = await findAllCondicion(obj);
+
+    if (result.valid) {
+        res.status(200).send(
+            responsesServices.success((data=result.data), msg=successMessages.SUCCESS_FINDALL));
+    } else {
+        res.status(400).send(
+            responsesServices.error((msg = errorMessages.ERROR_FIND)));
+    }
+};
+ 

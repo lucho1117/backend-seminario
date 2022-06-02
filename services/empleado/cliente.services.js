@@ -91,3 +91,25 @@ exports.deleteById = async (obj) => {
 		});
 };
 
+exports.findAllCondicion = async (obj) => {
+	let query = `SELECT C.ID_CLIENTE idCliente, C.ID_NEGOCIO idNegocio, C.NOMBRE nombre, C.APELLIDO apellido,
+					C.DPI dpi, C.NIT nit, C.DIRECCION direccion, C.EMAIL email, C.TELEFONO telefono,
+					C.ACTIVO activo, N.NOMBRE negocio
+				FROM CLIENTE C
+				INNER JOIN NEGOCIO N ON N.ID_NEGOCIO = C.ID_NEGOCIO
+				WHERE C.ACTIVO = 1 AND N.ID_NEGOCIO IN (${obj.idPrimero},${obj.idSegundo})
+				ORDER BY C.ID_CLIENTE DESC`;
+	return sequelize
+		.query(query, {
+			type: Sequelize.QueryTypes.SELECT,
+		})
+		.then((response) => {
+			return responsesServices.success(response);
+		})
+		.catch((error) => {
+			console.log(error.message);
+			return responsesServices.error(error.message);
+		});
+		
+  }
+
