@@ -60,6 +60,11 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
             field: 'PRECIO'
         },
+        estado: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          field: 'ESTADO'
+        },
         activo: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
