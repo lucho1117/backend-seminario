@@ -1,23 +1,44 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('area',{
-        idArea: {
+	return sequelize.define('materiaPrima',{
+        idMateriaPrima: {
           type: DataTypes.BIGINT,
           allowNull: false,
           primaryKey: true,
           autoIncrement: true,
-          field: 'ID_AREA'
+          field: 'ID_MATERIA_PRIMA'
+        },
+        idTipoMateriaPrima: {
+            type: DataTypes.BIGINT,
+            allowNull: false,
+            references: {
+                model: {
+                    tableName: "TIPO_MATERIA_PRIMA",
+                },
+                key: "ID_TIPO_MATERIA_PRIMA",
+            },
+            field: "ID_TIPO_MATERIA_PRIMA",
         },
         nombre: {
-          type: DataTypes.STRING(200),
-          allowNull: false,
-          field: 'NOMBRE'
-        },
+            type: DataTypes.STRING,
+            allowNull: false,
+            field: 'NOMBRE'
+          },
         descripcion: {
-          type: DataTypes.STRING(500),
+          type: DataTypes.STRING,
           allowNull: true,
           field: 'DESCRIPCION'
+        },
+        fechaIngreso: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'FECHA_INGRESO'
+        },
+        stock: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            field: 'STOCK'
         },
         activo: {
           type: DataTypes.BOOLEAN,
@@ -42,7 +63,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'AREA',
+        tableName: 'MATERIA_PRIMA',
         timestamps: false
       })
 };

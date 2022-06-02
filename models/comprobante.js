@@ -1,23 +1,29 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('area',{
-        idArea: {
+	return sequelize.define('comprobante',{
+        idComprobante: {
           type: DataTypes.BIGINT,
           allowNull: false,
           primaryKey: true,
           autoIncrement: true,
-          field: 'ID_AREA'
+          field: 'ID_COMPROBANTE'
         },
-        nombre: {
-          type: DataTypes.STRING(200),
-          allowNull: false,
-          field: 'NOMBRE'
+        idAsignacion: {
+            type: DataTypes.BIGINT,
+            allowNull: false,
+            references: {
+                model: {
+                    tableName: "ASIGNACION",
+                },
+                key: "ID_ASIGNACION",
+            },
+            field: "ID_ASIGNACION",
         },
-        descripcion: {
-          type: DataTypes.STRING(500),
-          allowNull: true,
-          field: 'DESCRIPCION'
+        fecha: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'FECHA'
         },
         activo: {
           type: DataTypes.BOOLEAN,
@@ -42,7 +48,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'AREA',
+        tableName: 'COMPROBANTE',
         timestamps: false
       })
 };

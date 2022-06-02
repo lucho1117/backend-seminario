@@ -1,23 +1,33 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('area',{
-        idArea: {
+	return sequelize.define('tipoVehiculo',{
+        idTipoVehiculo: {
           type: DataTypes.BIGINT,
           allowNull: false,
           primaryKey: true,
           autoIncrement: true,
-          field: 'ID_AREA'
+          field: 'ID_TIPO_VEHICULO'
         },
         nombre: {
-          type: DataTypes.STRING(200),
-          allowNull: false,
-          field: 'NOMBRE'
+            type: DataTypes.STRING,
+            allowNull: false,
+            field: 'NOMBRE'
+        },
+        ejes: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'EJES'
+        },
+        toneladas: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'TONELADAS'
         },
         descripcion: {
-          type: DataTypes.STRING(500),
-          allowNull: true,
-          field: 'DESCRIPCION'
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'DESCRIPCION'
         },
         activo: {
           type: DataTypes.BOOLEAN,
@@ -42,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'AREA',
+        tableName: 'TIPO_VEHICULO',
         timestamps: false
       })
 };

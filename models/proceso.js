@@ -1,27 +1,42 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('area',{
-        idArea: {
+	return sequelize.define('proceso',{
+        idProceso: {
           type: DataTypes.BIGINT,
           allowNull: false,
           primaryKey: true,
           autoIncrement: true,
-          field: 'ID_AREA'
+          field: 'ID_PROCESO'
         },
         nombre: {
-          type: DataTypes.STRING(200),
+          type: DataTypes.STRING,
           allowNull: false,
           field: 'NOMBRE'
         },
         descripcion: {
-          type: DataTypes.STRING(500),
-          allowNull: true,
-          field: 'DESCRIPCION'
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'DESCRIPCION'
+        },
+        fechaInicio: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'FECHA_INICIO'
+        },
+        fechaFin: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'FECHA_FIN'
+        },
+        costo: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            field: 'COSTO'
         },
         activo: {
           type: DataTypes.BOOLEAN,
-          allowNull: false,
+          allowNull: true,
           defaultValue: 0,
           field: 'ACTIVO'
         },
@@ -42,7 +57,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'AREA',
+        tableName: 'PROCESO',
         timestamps: false
       })
 };

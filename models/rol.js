@@ -1,16 +1,16 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('area',{
-        idArea: {
+	return sequelize.define('rol',{
+        idRol: {
           type: DataTypes.BIGINT,
           allowNull: false,
           primaryKey: true,
           autoIncrement: true,
-          field: 'ID_AREA'
+          field: 'ID_ROL'
         },
         nombre: {
-          type: DataTypes.STRING(200),
+          type: DataTypes.STRING(255),
           allowNull: false,
           field: 'NOMBRE'
         },
@@ -42,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'AREA',
+        tableName: 'ROL',
         timestamps: false
       })
 };

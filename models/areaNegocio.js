@@ -1,18 +1,35 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('area',{
-        idArea: {
+	return sequelize.define('areaNegocio',{
+        idAreaNegocio: {
           type: DataTypes.BIGINT,
           allowNull: false,
           primaryKey: true,
           autoIncrement: true,
-          field: 'ID_AREA'
+          field: 'ID_AREA_NEGOCIO'
         },
-        nombre: {
-          type: DataTypes.STRING(200),
-          allowNull: false,
-          field: 'NOMBRE'
+        idArea: {
+            type: DataTypes.BIGINT,
+            allowNull: true,
+            references: {
+                model: {
+                    tableName: "AREA",
+                },
+                key: "ID_AREA",
+            },
+            field: "ID_AREA",
+        },
+        idNegocio: {
+            type: DataTypes.BIGINT,
+            allowNull: true,
+            references: {
+                model: {
+                    tableName: "NEGOCIO",
+                },
+                key: "ID_NEGOCIO",
+            },
+            field: "ID_NEGOCIO",
         },
         descripcion: {
           type: DataTypes.STRING(500),
@@ -42,7 +59,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'AREA',
+        tableName: 'AREA_NEGOCIO',
         timestamps: false
       })
 };
