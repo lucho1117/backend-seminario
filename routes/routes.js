@@ -236,6 +236,8 @@ app.post("/factura/list", facturaController.findAll);
 app.post("/factura/save", facturaController.save);
 app.post("/factura/update", facturaController.update);
 app.post("/factura/delete", facturaController.delete);
+app.post("/factura/listAlquiler", facturaController.findAllAlquiler);
+app.post("/factura/saveAlquiler", facturaController.saveAllAlquiler);
 
 app.post("/producto/list", productoController.findAll);
 app.post("/producto/save", productoController.save);

@@ -14,7 +14,7 @@ exports.findAll = async (obj) => {
 			INNER JOIN CATEGORIA C ON C.ID_CATEGORIA = P.ID_CATEGORIA
 			WHERE P.ACTIVO = 1`  
 			
-	if (obj.venta) query += ` AND P.VENTA = ${obj.venta}`
+	if (obj.venta === 1 || obj.venta === 0) query += ` AND P.VENTA = ${obj.venta}`
 
 	query +=	` ORDER BY P.ID_PRODUCTO DESC
 	`;

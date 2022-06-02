@@ -1,7 +1,7 @@
 /************************************************************************
  * IMPORTS
  ************************************************************************/
- const { findAll, save, update, deleteById } = require('../../services/ventas/factura.services');
+ const { findAll, save, update, deleteById, findAllAlquiler, saveAllAlquiler } = require('../../services/ventas/factura.services');
  const responsesServices = require('../../responses/responses.services');
  
  /************************************************************************
@@ -71,3 +71,33 @@
          res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_DELETE)));
      }
  };
+
+ exports.findAllAlquiler = async (req, res) => {
+    let obj = req.body;
+     const result = await findAllAlquiler(obj);
+ 
+     if (result.valid) {
+         res.status(200).send(
+             responsesServices.success((data=result.data), msg=successMessages.SUCCESS_FINDALL));
+     } else {
+         res.status(400).send(
+             responsesServices.error((msg = errorMessages.ERROR_FIND)));
+     }
+ };
+
+ exports.saveAllAlquiler = async (req, res) => {
+     
+    let obj = req.body;
+    // Guardar
+    const result = await saveAllAlquiler(obj);
+   
+    //validar proceso exitoso
+    if (result.valid) {
+        //retornar mensaje de exito
+        res.status(200).send(responsesServices.success((data = result.data), (msg = result.msg)));
+    } else {
+        //retornar mensaje de error
+        res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_ADD)));
+    }
+
+};
