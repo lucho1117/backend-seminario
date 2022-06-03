@@ -190,6 +190,8 @@ app.post("/asignacion/list", asignacionController.findAll);
 app.post("/asignacion/save", asignacionController.save);
 app.post("/asignacion/update", asignacionController.update);
 app.post("/asignacion/delete", asignacionController.delete);
+app.post("/asignacion/empezarRuta", asignacionController.empezarRuta);
+app.post("/asignacion/terminarRuta", asignacionController.terminarRuta);
 
 app.post("/cargamento/list", cargamentoController.findAll);
 app.post("/cargamento/save", cargamentoController.save);

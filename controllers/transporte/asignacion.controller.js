@@ -1,7 +1,7 @@
 /************************************************************************
  * IMPORTS
  ************************************************************************/
- const { findAll, save, update, deleteById } = require('../../services/transporte/asignacion.services');
+ const { findAll, save, update, deleteById, empezarRuta, terminarRuta } = require('../../services/transporte/asignacion.services');
  const responsesServices = require('../../responses/responses.services');
  
  /************************************************************************
@@ -71,3 +71,33 @@
          res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_DELETE)));
      }
  };
+
+ exports.empezarRuta = async (req, res) => {
+    let obj = req.body;
+    const result = await empezarRuta(obj);
+
+    //validar proceso exitoso
+    if (result.valid) {
+       //retornar mensaje de exito
+       res.status(200).send(responsesServices.success((data = result.data[0]), (msg = "Ha empezado la ruta con exito, buen viaje")));
+    } else {
+        //retornar mensaje de error
+        res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_UPDATE)));
+    }
+
+};
+
+exports.terminarRuta = async (req, res) => {
+    let obj = req.body;
+    const result = await terminarRuta(obj);
+
+    //validar proceso exitoso
+    if (result.valid) {
+       //retornar mensaje de exito
+       res.status(200).send(responsesServices.success((data = result.data[0]), (msg = "Ha finalizado la ruta con exito, buen viaje")));
+    } else {
+        //retornar mensaje de error
+        res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_UPDATE)));
+    }
+
+};

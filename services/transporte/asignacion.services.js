@@ -129,3 +129,57 @@ exports.deleteById = async (obj) => {
 		
 };
 
+exports.empezarRuta = async (obj) => {
+	let aux = {
+		estado: 2
+	}
+	return asignacion
+		.update(aux, {
+			where: { idAsignacion: obj.idAsignacion },
+		})
+		.then((response) => {
+			return responsesServices.success(response);
+		})
+		.catch((error) => {
+			console.log(error);
+			return responsesServices.error(error.message);
+		});
+};
+
+exports.terminarRuta = async (obj) => {
+	let aux = {
+		estado: 3
+	}
+	let respAsignacion = await asignacion
+		.update(aux, {
+			where: { idAsignacion: obj.idAsignacion },
+		})
+		.then((response) => {
+			return responsesServices.success(response);
+		})
+		.catch((error) => {
+			console.log(error);
+			return responsesServices.error(error.message);
+		});
+
+	if (respAsignacion.valid) {
+		let aux = {idViaje: obj.idViaje, estado: 3 }
+		let respViaje = await ServiceViaje.update(aux);
+
+		if (respViaje.valid) {
+			let aux = {idVehiculo: obj.idVehiculo, disponible: 1}
+			let respVehiculo = await ServiceVehiculo.update(aux);
+
+			if (respVehiculo.valid) {
+				return responsesServices.success("La asignación fue terminada correctamente");
+			} else {
+				return responsesServices.error("Hubo problema al actualizar el vehiculo");
+			}
+		} else {
+			return responsesServices.error("Hubo problema al actualizar el viaje");
+		}
+	} else {
+		return responsesServices.error("Hubo un problema al actualizar la asignacion");
+	}
+};
+

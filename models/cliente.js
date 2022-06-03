@@ -27,12 +27,12 @@ module.exports = function(sequelize, DataTypes) {
         },
         apellido: {
             type: DataTypes.STRING(100),
-            allowNull: false,
+            allowNull: true,
             field: 'APELLIDO'
         },
         dpi: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             defaultValue: 0,
             field: 'DPI'
         },
