@@ -16,9 +16,10 @@ exports.findAll = async (obj) => {
 				INNER JOIN CARGAMENTO C ON C.ID_CARGAMENTO = V.ID_CARGAMENTO
 				INNER JOIN CLIENTE CL ON CL.ID_CLIENTE = V.ID_CLIENTE
 				WHERE V.ACTIVO = 1 `
-	if (obj.estado  === 2) ` AND V.ESTADO = 2`
 
-	query +=    `ORDER BY V.ID_VIAJE DESC`;
+	if (obj.estado  === 1) query +=  ` AND V.ESTADO = 1 `
+
+	query +=    ` ORDER BY V.ID_VIAJE DESC`;
 	return sequelize
 		.query(query, {
 			type: Sequelize.QueryTypes.SELECT,
@@ -46,6 +47,7 @@ exports.save = async (obj) => {
 			return responsesServices.success(response);
 		})
 		.catch((error) => {
+			console.log(error);
 			return responsesServices.error(error.message);
 		});
 };

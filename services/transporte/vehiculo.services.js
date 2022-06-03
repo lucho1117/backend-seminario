@@ -9,14 +9,14 @@ const {generateDateNow} = require('../global.services');
 
 exports.findAll = async (obj) => {
 	let query = `SELECT V.ID_VEHICULO idVehiculo, V.PLACA placa, V.MODELO modelo, V.COLOR color, V.DESCRIPCION descripcion,
-					V.MARCA marca, V.DISPONIBLE disponible, TV.NOMBRE tipoVehiculo, V.ID_TIPO_VEHICULO idTipoVehiculo, V.DISPONIBLE disponible
+					V.MARCA marca, V.DISPONIBLE disponible, TV.NOMBRE tipoVehiculo, V.ID_TIPO_VEHICULO idTipoVehiculo, V.DISPONIBLE disponible, TV.TONELADAS toneladas
 					FROM VEHICULO V
 					INNER JOIN TIPO_VEHICULO TV ON TV.ID_TIPO_VEHICULO = V.ID_TIPO_VEHICULO
 					WHERE V.ACTIVO= 1 `
 					
-	if (obj.disponible === 1) query += ` AND V.DISPONIBLE = 1`
+	if (obj.disponible === 1) query += ` AND V.DISPONIBLE = 1  `
 
-		query += `ORDER BY V.ID_VEHICULO DESC`;
+		query += ` ORDER BY V.ID_VEHICULO DESC`;
 	return sequelize
 		.query(query, {
 			type: Sequelize.QueryTypes.SELECT,
