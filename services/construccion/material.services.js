@@ -8,19 +8,24 @@ const {generateDateNow} = require('../global.services');
 
 
 exports.findAll = async () => {
-  return material.findAll({
-      where: {
-        activo: true,
-      },
-      order: [["idMaterial", "DESC"]],
-    })
-    .then(response=>{
-      return responsesServices.success(response);
-    })
-    .catch(error => {
-      console.log(error);
-      return responsesServices.error(error.message);
-    })
+	let query = `SELECT M.ID_MATERIAL idMaterial, M.NOMBRE nombre, M.DESCRIPCION descripcion,
+					M.PRECIO precio, M.DESCRIPCION descripcion, TM.NOMBRE tipoMaterial, M.ID_TIPO_MATERIAL idTipoMaterial
+				FROM MATERIAL M
+				INNER JOIN TIPO_MATERIAL TM ON TM.ID_TIPO_MATERIAL = M.ID_TIPO_MATERIAL
+				WHERE M.ACTIVO = 1
+				ORDER BY M.ID_MATERIAL DESC`  
+
+	return sequelize
+		.query(query, {
+			type: Sequelize.QueryTypes.SELECT,
+		})
+		.then((response) => {
+			return responsesServices.success(response);
+		})
+		.catch((error) => {
+			console.log(error.message);
+			return responsesServices.error(error.message);
+		});
 }
 
 exports.save = async (obj) => {
