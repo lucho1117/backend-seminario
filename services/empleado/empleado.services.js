@@ -91,3 +91,20 @@ exports.deleteById = async (obj) => {
 		});
 };
 
+exports.findByArea = async (obj) => {
+	return empleado.findAll({
+		where: {
+		  activo: true,
+		  idAreaNegocio: obj.idAreaNegocio
+		},
+		order: [["idEmpleado", "DESC"]],
+	  })
+	  .then(response=>{
+		return responsesServices.success(response);
+	  })
+	  .catch(error => {
+		console.log(error);
+		return responsesServices.error(error.message);
+	  })
+  }
+
