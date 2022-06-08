@@ -111,6 +111,7 @@ app.post("/fase/list", faseController.findAll);
 app.post("/fase/save", faseController.save);
 app.post("/fase/update", faseController.update);
 app.post("/fase/delete", faseController.delete);
+app.post("/fase/listByObra", faseController.findAllByObra);
 
 app.post("/manoObra/list", manoObraController.findAll);
 app.post("/manoObra/save", manoObraController.save);

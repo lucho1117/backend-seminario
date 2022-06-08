@@ -1,7 +1,7 @@
 /************************************************************************
  * IMPORTS
  ************************************************************************/
- const { findAll, save, update, deleteById } = require('../../services/construccion/fase.services');
+ const { findAll, save, update, deleteById, findAllByObra } = require('../../services/construccion/fase.services');
  const responsesServices = require('../../responses/responses.services');
  
  /************************************************************************
@@ -76,3 +76,16 @@
          res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_DELETE)));
      }
  };
+
+ exports.findAllByObra = async (req, res) => {
+    let obj = req.body;
+    const result = await findAllByObra(obj);
+
+    if (result.valid) {
+        res.status(200).send(
+            responsesServices.success((data=result.data), msg=successMessages.SUCCESS_FINDALL));
+    } else {
+        res.status(400).send(
+            responsesServices.error((msg = errorMessages.ERROR_FIND)));
+    }
+};
