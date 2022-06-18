@@ -8,19 +8,25 @@ const {generateDateNow} = require('../global.services');
 
 
 exports.findAll = async () => {
-  return maquinaria.findAll({
-      where: {
-        activo: true,
-      },
-      order: [["idMaquinaria", "DESC"]],
-    })
-    .then(response=>{
-      return responsesServices.success(response);
-    })
-    .catch(error => {
-      console.log(error);
-      return responsesServices.error(error.message);
-    })
+
+
+
+let query =  `	SELECT M.ID_MAQUINARIA idMaquinaria, M.NOMBRE nombre, M.DESCRIPCION descripcion, TM.NOMBRE tipoMaquinaria, M.ID_TIPO_MAQUINARIA idTipoMaquinaria
+						FROM MAQUINARIA M
+						INNER JOIN TIPO_MAQUINARIA TM ON TM.ID_TIPO_MAQUINARIA = M.ID_TIPO_MAQUINARIA
+						WHERE M.ACTIVO = 1
+						ORDER BY M.ID_MAQUINARIA DESC`;
+	return sequelize
+		.query(query, {
+		type: Sequelize.QueryTypes.SELECT,
+	})
+		.then((response) => {
+		return responsesServices.success(response);
+	})
+	.catch((error) => {
+		console.log(error.message);
+		return responsesServices.error(error.message);
+	});
 }
 
 exports.save = async (obj) => {

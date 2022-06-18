@@ -14,7 +14,8 @@
   ************************************************************************/
  
  exports.findAll = async (req, res) => {
-     const result = await findAll();
+    let obj = req.body;
+     const result = await findAll(obj);
  
      if (result.valid) {
          res.status(200).send(
@@ -64,13 +65,8 @@
  
      //validar proceso exitoso
      if (result.valid) {
-         if (result.data[0] === 1) {
-             //retornar mensaje de exito
-             res.status(200).send(responsesServices.success((data = result.data[0]), (msg = successMessages.SUCCESS_DELETE)));
-         } else {
-             //retornar mensaje de error
-             res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_ID)));
-         }
+         res.status(200).send(responsesServices.success((data = result.data[0]), (msg = successMessages.SUCCESS_DELETE)));
+         
      } else {
          //retornar mensaje de error
          res.status(200).send(responsesServices.error((msg = errorMessages.ERROR_DELETE)));

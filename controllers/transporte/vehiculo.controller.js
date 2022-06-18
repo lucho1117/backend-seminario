@@ -14,7 +14,8 @@
   ************************************************************************/
  
  exports.findAll = async (req, res) => {
-     const result = await findAll();
+     let obj = req.body;
+     const result = await findAll(obj);
  
      if (result.valid) {
          res.status(200).send(
