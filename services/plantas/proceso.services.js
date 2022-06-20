@@ -24,6 +24,7 @@ exports.findAll = async () => {
 }
 
 exports.save = async (obj) => {
+	console.log(obj);
 	const aux = {
 		...obj,
 		activo: 1,
@@ -36,6 +37,7 @@ exports.save = async (obj) => {
 			return responsesServices.success(response);
 		})
 		.catch((error) => {
+			console.log(error);
 			return responsesServices.error(error.message);
 		});
 };
@@ -49,7 +51,7 @@ exports.update = async (obj) => {
 			return responsesServices.success(response);
 		})
 		.catch((error) => {
-			console.log(error.message);
+			console.log(error);
 			return responsesServices.error(error.message);
 		});
 };

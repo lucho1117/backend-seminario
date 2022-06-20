@@ -125,3 +125,28 @@ exports.findByArea = async (obj) => {
 		});
   }
 
+  exports.findByAreaPlanta = async () => {
+	const query = `
+	SELECT E.ID_EMPLEADO idEmpleado, E.ID_ROL idRol, E.ID_AREA_NEGOCIO idAreaNegocio, E.NOMBRE nombre,
+		E.APELLIDO apellido, E.DPI dpi, E.NIT nit, E.DIRECCION direccion, E.EMAIL email, E.FECHA_NACIMIENTO fechaNacimiento,
+		E.TELEFONO telefono, E.FECHA_INGRESO fechaIngreso, E.ID_SEDE idSede, R.NOMBRE rol, AN.DESCRIPCION areaNegocio, S.DEPARTAMENTO sede, E.SUELDO sueldo
+	FROM EMPLEADO E
+	INNER JOIN ROL R ON R.ID_ROL = E.ID_ROL
+	INNER JOIN AREA_NEGOCIO AN ON AN.ID_AREA_NEGOCIO = E.ID_AREA_NEGOCIO
+	INNER JOIN SEDE S ON S.ID_SEDE = E.ID_SEDE
+	WHERE E.ACTIVO = 1 AND E.ID_AREA_NEGOCIO = 5 OR E.ID_AREA_NEGOCIO = 6
+	ORDER BY E.ID_EMPLEADO DESC`;
+
+	return sequelize
+		.query(query, {
+			type: Sequelize.QueryTypes.SELECT,
+		})
+		.then((response) => {
+			return responsesServices.success(response);
+		})
+		.catch((error) => {
+			console.log(error.message);
+			return responsesServices.error(error.message);
+		});
+  }
+

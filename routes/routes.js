@@ -79,6 +79,7 @@ app.post("/cliente/listCondicion", clienteController.findAllCondicion);
 app.post("/empleado/list", empleadoController.findAll);
 app.post("/empleado/listByRolByArea", empleadoController.findAllByRolArea);
 app.post("/empleado/listByArea", empleadoController.findByArea);
+app.post("/empleado/plantas", empleadoController.findByAreaPlanta);
 app.post("/empleado/save", empleadoController.save);
 app.post("/empleado/update", empleadoController.update);
 app.post("/empleado/delete", empleadoController.delete);
