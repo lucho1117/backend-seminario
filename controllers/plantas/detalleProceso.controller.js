@@ -14,7 +14,8 @@
   ************************************************************************/
  
  exports.findAll = async (req, res) => {
-     const result = await findAll();
+    let idProceso = req.body.idProceso;
+     const result = await findAll(idProceso);
  
      if (result.valid) {
          res.status(200).send(
