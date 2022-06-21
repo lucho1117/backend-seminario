@@ -43,6 +43,8 @@ const productoController = require("../controllers/ventas/producto.controller");
 const tipoAlquilerController = require("../controllers/ventas/tipoAlquiler.controller");
 const tipoPagoController = require("../controllers/ventas/tipoPago.controller");
 
+const globalController = require("../controllers/global.controller");
+
 
 app.get("/", function (req, res) {
     res.status(200)
@@ -259,3 +261,8 @@ app.post("/tipoPago/list", tipoPagoController.findAll);
 app.post("/tipoPago/save", tipoPagoController.save);
 app.post("/tipoPago/update", tipoPagoController.update);
 app.post("/tipoPago/delete", tipoPagoController.delete);
+
+
+app.get("/global/conteoEmpleados", globalController.totalEmpleadosArea);
+app.get("/global/productosMasVendidos", globalController.productosMasVendidos);
+app.get("/global/productosMasAlquilados", globalController.productosMasAlquilados);
